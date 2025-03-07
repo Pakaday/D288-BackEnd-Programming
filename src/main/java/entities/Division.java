@@ -10,13 +10,11 @@ import lombok.*;
 public class Division {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "division_id")
     private Long id;
 
     @Column(name = "division")
     private String division;
-
-    @Column(name = "division_id")
-    private int divisionId;
 
     @Column(name = "create_date")
     private String createDate;

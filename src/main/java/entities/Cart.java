@@ -10,10 +10,8 @@ import lombok.*;
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Column(name = "cart_id")
-    private int cartId;
+    private Long id;
 
     @Column(name = "package_price")
     private double packagePrice;

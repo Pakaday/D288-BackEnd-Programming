@@ -10,10 +10,8 @@ import lombok.*;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Column(name = "customer_id")
-    private int customerId;
+    private Long id;
 
     @Column(name = "address")
     private String address;

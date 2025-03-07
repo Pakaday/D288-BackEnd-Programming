@@ -10,10 +10,8 @@ import lombok.*;
 public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Column(name = "country_id")
-    private int countryId;
+    private Long id;
 
     @Column(name = "country")
     private String country;

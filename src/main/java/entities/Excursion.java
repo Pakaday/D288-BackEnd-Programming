@@ -10,10 +10,8 @@ import lombok.*;
 public class Excursion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Column(name = "excursion_id")
-    private int excursionId;
+    private Long id;
 
     @Column(name = "create_date")
     private String createDate;
