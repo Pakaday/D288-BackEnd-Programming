@@ -3,6 +3,8 @@ package entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @Entity
@@ -24,4 +26,18 @@ public class CartItem {
 
     @Column(name = "vacation_id")
     private int vacationId;
+
+    //Map to Vacation table
+    @ManyToOne
+    @JoinColumn(name = "vacation_id")
+    private Vacation vacation;
+
+    //Map to Cart table
+    @ManyToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
+
+    //Map to Excursion table
+    @ManyToMany(mappedBy = "cart_items")
+    private Set<Excursion> excursions;
 }

@@ -3,6 +3,8 @@ package entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @Entity
@@ -21,4 +23,8 @@ public class Country {
 
     @Column(name = "last_update")
     private String lastUpdate;
+
+    //Map to Division table
+    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Division> divisions;
 }

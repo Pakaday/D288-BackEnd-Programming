@@ -3,6 +3,8 @@ package entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @Entity
@@ -30,4 +32,8 @@ public class Vacation {
 
     @Column(name = "vacation_title")
     private String vacationTitle;
+
+    //Map to Excursion table
+    @OneToMany(mappedBy = "vacation", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Excursion> excursions;
 }

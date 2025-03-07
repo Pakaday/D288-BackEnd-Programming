@@ -3,6 +3,8 @@ package entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @Entity
@@ -24,4 +26,13 @@ public class Division {
 
     @Column(name = "country_id")
     private int countryId;
+
+    //Map to Country table
+    @ManyToOne
+    @JoinColumn(name = "country_id")
+    private Country country;
+
+    //Map to Customer table
+    @OneToMany(mappedBy = "division", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Customer> customers;
 }

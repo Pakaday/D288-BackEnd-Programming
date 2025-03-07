@@ -3,6 +3,8 @@ package entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @Entity
@@ -33,4 +35,13 @@ public class Cart {
 
     @Column(name = "customer_id")
     private int customerId;
+
+    //Map to Customer table
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
+    //Map to Cart Items table
+    @OneToMany(mappedBy = "carts", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<CartItem> cartItems;
 }
