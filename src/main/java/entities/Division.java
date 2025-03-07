@@ -18,7 +18,7 @@ public class Division {
     @Getter
     @Setter
     @Column(name = "division_id")
-    private Long divisionId;
+    private int divisionId;
 
     @Getter
     @Setter
