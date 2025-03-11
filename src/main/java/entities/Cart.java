@@ -24,6 +24,9 @@ public class Cart {
     @Column(name = "status")
     private String status;
 
+    @Enumerated(EnumType.STRING)
+    private StatusType statusType;
+
     @Column(name = "order_tracking_number")
     private String orderTrackingNumber;
 

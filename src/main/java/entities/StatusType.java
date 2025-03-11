@@ -1,4 +1,5 @@
 package entities;
 
-public class StatusType {
+public enum StatusType {
+    pending, ordered, canceled;
 }
