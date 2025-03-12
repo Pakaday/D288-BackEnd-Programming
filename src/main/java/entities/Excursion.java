@@ -33,12 +33,12 @@ public class Excursion {
     @Column(name = "vacation_id")
     private int vacationId;
 
-    //Map to Vacation table
+    //Map to vacations table
     @ManyToOne
     @JoinColumn(name = "vacation_id")
     private Vacation vacation;
 
-    //Map to Cart Items table
+    //Map to cart_items table
     @ManyToMany(mappedBy = "excursions")
     private Set<CartItem> cartItems;
 }

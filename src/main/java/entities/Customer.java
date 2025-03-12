@@ -36,12 +36,12 @@ public class Customer {
     @Column(name = "postal_code")
     private String postalCode;
 
-    //Map to Division table
+    //Map to divisions table
     @ManyToOne
     @JoinColumn(name = "division_id")
     private Division division;
 
-    //Map to Cart table
+    //Map to carts table
     @OneToMany(mappedBy = "cart_id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Cart> carts;
 }

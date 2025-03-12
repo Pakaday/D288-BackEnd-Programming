@@ -39,12 +39,12 @@ public class Cart {
     @Column(name = "customer_id")
     private int customerId;
 
-    //Map to Customer table
+    //Map to customers table
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    //Map to Cart Items table
+    //Map to cart_items table
     @OneToMany(mappedBy = "carts", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<CartItem> cartItems;
 }

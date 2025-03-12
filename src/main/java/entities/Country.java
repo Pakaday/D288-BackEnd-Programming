@@ -24,7 +24,7 @@ public class Country {
     @Column(name = "last_update")
     private String lastUpdate;
 
-    //Map to Division table
+    //Map to divisions table
     @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Division> divisions;
 }

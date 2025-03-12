@@ -27,17 +27,20 @@ public class CartItem {
     @Column(name = "vacation_id")
     private int vacationId;
 
-    //Map to Vacation table
+    //Map to vacation table
     @ManyToOne
     @JoinColumn(name = "vacation_id")
     private Vacation vacation;
 
-    //Map to Cart table
+    //Map to carts table
     @ManyToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    //Map to Excursion table
-    @ManyToMany(mappedBy = "cart_items")
+    //Map to excursion_cartitem table
+    @ManyToMany
+    @JoinTable(name = "excursion_cartitem",
+        joinColumns = @JoinColumn(name = "cart_item_id"),
+            inverseJoinColumns = @JoinColumn(name = "excursion_id"))
     private Set<Excursion> excursions;
 }
