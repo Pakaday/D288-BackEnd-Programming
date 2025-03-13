@@ -2,7 +2,10 @@ package entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.sql.Date;
 import java.util.Set;
 
 @Getter
@@ -16,23 +19,23 @@ public class Division {
     private Long id;
 
     @Column(name = "division")
-    private String division;
+    private String division_name;
 
     @Column(name = "create_date")
-    private String createDate;
+    @CreationTimestamp
+    private Date create_date;
 
     @Column(name = "last_update")
-    private String lastUpdate;
-
-    @Column(name = "country_id")
-    private int countryId;
+    @UpdateTimestamp
+    private Date last_update;
 
     //Map to countries table
     @ManyToOne
-    @JoinColumn(name = "country_id")
+    @JoinColumn(name = "country_id", insertable = false, updatable = false)
     private Country country;
 
     //Map to customers table
     @OneToMany(mappedBy = "division", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Customer> customers;
+
 }

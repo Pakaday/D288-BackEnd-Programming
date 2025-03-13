@@ -2,7 +2,11 @@ package entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.sql.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -16,15 +20,17 @@ public class Country {
     private Long id;
 
     @Column(name = "country")
-    private String country;
+    private String country_name;
 
     @Column(name = "create_date")
-    private String createDate;
+    @CreationTimestamp
+    private Date create_date;
 
     @Column(name = "last_update")
-    private String lastUpdate;
+    @UpdateTimestamp
+    private Date last_update;
 
     //Map to divisions table
     @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Division> divisions;
+    private Set<Division> divisions = new HashSet<>();
 }

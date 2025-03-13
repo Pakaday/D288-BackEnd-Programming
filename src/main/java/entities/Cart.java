@@ -2,7 +2,12 @@ package entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.math.BigDecimal;
+import java.sql.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -16,28 +21,25 @@ public class Cart {
     private Long id;
 
     @Column(name = "package_price")
-    private double packagePrice;
+    private BigDecimal package_price;
     
     @Column(name = "party_size")
-    private int partySize;
+    private int party_size;
 
     @Column(name = "status")
-    private String status;
-
     @Enumerated(EnumType.STRING)
-    private StatusType statusType;
+    private StatusType status;
 
     @Column(name = "order_tracking_number")
     private String orderTrackingNumber;
 
     @Column(name = "create_date")
-    private String createDate;
+    @CreationTimestamp
+    private Date create_date;
 
     @Column(name = "last_update")
-    private String lastUpdate;
-
-    @Column(name = "customer_id")
-    private int customerId;
+    @UpdateTimestamp
+    private Date last_udate;
 
     //Map to customers table
     @ManyToOne
@@ -45,6 +47,6 @@ public class Cart {
     private Customer customer;
 
     //Map to cart_items table
-    @OneToMany(mappedBy = "carts", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<CartItem> cartItems;
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<CartItem> cartItems = new HashSet<>();
 }

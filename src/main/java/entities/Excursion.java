@@ -2,7 +2,11 @@ package entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.math.BigDecimal;
+import java.sql.Date;
 import java.util.Set;
 
 @Getter
@@ -16,22 +20,21 @@ public class Excursion {
     private Long id;
 
     @Column(name = "create_date")
-    private String createDate;
+    @CreationTimestamp
+    private Date create_date;
     
     @Column(name = "excursion_price")
-    private double excursionPrice;
+    private BigDecimal excursion_price;
 
     @Column(name = "excursion_title")
-    private String excursionTitle;
+    private String excursion_title;
 
     @Column(name = "image_url")
-    private String imageUrl;
+    private String image_URL;
 
     @Column(name = "last_update")
-    private String lastUpdate;
-
-    @Column(name = "vacation_id")
-    private int vacationId;
+    @UpdateTimestamp
+    private Date last_update;
 
     //Map to vacations table
     @ManyToOne
@@ -40,5 +43,5 @@ public class Excursion {
 
     //Map to cart_items table
     @ManyToMany(mappedBy = "excursions")
-    private Set<CartItem> cartItems;
+    private Set<CartItem> cartitems;
 }

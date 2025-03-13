@@ -2,7 +2,11 @@ package entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.math.BigDecimal;
+import java.sql.Date;
 import java.util.Set;
 
 @Getter
@@ -16,22 +20,24 @@ public class Vacation {
     private Long id;
 
     @Column(name = "create_date")
-    private String createDate;
+    @CreationTimestamp
+    private Date createDate;
 
     @Column(name = "description")
     private String description;
 
     @Column(name = "image_url")
-    private String imageUrl;
+    private String image_URL;
 
     @Column(name = "last_update")
-    private String lastUpdate;
+    @UpdateTimestamp
+    private Date last_update;
 
     @Column(name = "travel_fare_price")
-    private double travelFarePrice;
+    private BigDecimal travel_price;
 
     @Column(name = "vacation_title")
-    private String vacationTitle;
+    private String vacation_title;
 
     //Map to excursions table
     @OneToMany(mappedBy = "vacation", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

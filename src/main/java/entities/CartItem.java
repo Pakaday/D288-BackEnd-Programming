@@ -2,7 +2,11 @@ package entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.sql.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -16,31 +20,27 @@ public class CartItem {
     private Long id;
 
     @Column(name = "create_date")
-    private String createDate;
+    @CreationTimestamp
+    private Date create_date;
 
     @Column(name = "last_update")
-    private String lastUpdate;
-
-    @Column(name = "cart_id")
-    private int cartId;
-
-    @Column(name = "vacation_id")
-    private int vacationId;
-
-    //Map to vacation table
-    @ManyToOne
-    @JoinColumn(name = "vacation_id")
-    private Vacation vacation;
+    @UpdateTimestamp
+    private Date last_update;
 
     //Map to carts table
     @ManyToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
+    //Map to vacation table
+    @ManyToOne
+    @JoinColumn(name = "vacation_id")
+    private Vacation vacation;
+
     //Map to excursion_cartitem table
     @ManyToMany
     @JoinTable(name = "excursion_cartitem",
         joinColumns = @JoinColumn(name = "cart_item_id"),
             inverseJoinColumns = @JoinColumn(name = "excursion_id"))
-    private Set<Excursion> excursions;
+    private Set<Excursion> excursions = new HashSet<>();
 }

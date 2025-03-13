@@ -2,7 +2,10 @@ package entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.sql.Date;
 import java.util.Set;
 
 @Getter
@@ -19,22 +22,24 @@ public class Customer {
     private String address;
 
     @Column(name = "create_date")
-    private String createDate;
+    @CreationTimestamp
+    private Date create_date;
 
     @Column(name = "customer_first_name")
-    private String customerFirstName;
+    private String firstName;
 
     @Column(name = "customer_last_name")
-    private String customerLastName;
+    private String lastName;
 
     @Column(name = "last_update")
-    private String lastUpdate;
+    @UpdateTimestamp
+    private Date last_update;
 
     @Column(name = "phone")
     private String phone;
 
     @Column(name = "postal_code")
-    private String postalCode;
+    private String postal_code;
 
     //Map to divisions table
     @ManyToOne
@@ -42,6 +47,6 @@ public class Customer {
     private Division division;
 
     //Map to carts table
-    @OneToMany(mappedBy = "cart_id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Cart> carts;
 }
