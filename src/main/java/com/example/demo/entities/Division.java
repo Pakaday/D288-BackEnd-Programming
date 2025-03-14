@@ -30,11 +30,19 @@ public class Division {
     private Date last_update;
 
     //Map to countries table
-    @ManyToOne
-    @JoinColumn(name = "country_id", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "country_id", nullable = false, insertable = false, updatable = false)
     private Country country;
 
     //Map to customers table
-    @OneToMany(mappedBy = "division", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "division", cascade = CascadeType.ALL)
     private Set<Customer> customers;
+
+    //Fix for front end not populating Division
+    @Column(name = "country_id")
+    private Long country_id;
+    public void setCountry(Country country) {
+        setCountry_id(country.getId());
+        this.country = country;
+    }
 }
