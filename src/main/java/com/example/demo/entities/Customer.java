@@ -18,27 +18,27 @@ public class Customer {
     @Column(name = "customer_id")
     private Long id;
 
-    @Column(name = "address")
+    @Column(name = "address", nullable = false)
     private String address;
 
     @Column(name = "create_date")
     @CreationTimestamp
     private Date create_date;
 
-    @Column(name = "customer_first_name")
+    @Column(name = "customer_first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "customer_last_name")
+    @Column(name = "customer_last_name", nullable = false)
     private String lastName;
 
     @Column(name = "last_update")
     @UpdateTimestamp
     private Date last_update;
 
-    @Column(name = "phone")
+    @Column(name = "phone", nullable = false)
     private String phone;
 
-    @Column(name = "postal_code")
+    @Column(name = "postal_code", nullable = false)
     private String postal_code;
 
     //Map to divisions table

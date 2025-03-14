@@ -1,6 +1,8 @@
 package com.example.demo.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -8,8 +10,8 @@ import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-//@Getter
-//@Setter
+@Getter
+@Setter
 @Entity
 @Table(name = "cart_items")
 public class CartItem {
@@ -41,53 +43,5 @@ public class CartItem {
     @JoinTable(name = "excursion_cartitem",
         joinColumns = @JoinColumn(name = "cart_item_id"),
             inverseJoinColumns = @JoinColumn(name = "excursion_id"))
-    private Set<Excursion> excursions = new HashSet<>();
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getCreate_date() {
-        return create_date;
-    }
-
-    public void setCreate_date(Date create_date) {
-        this.create_date = create_date;
-    }
-
-    public Date getLast_update() {
-        return last_update;
-    }
-
-    public void setLast_update(Date last_update) {
-        this.last_update = last_update;
-    }
-
-    public Cart getCart() {
-        return cart;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
-    }
-
-    public Vacation getVacation() {
-        return vacation;
-    }
-
-    public void setVacation(Vacation vacation) {
-        this.vacation = vacation;
-    }
-
-    public Set<Excursion> getExcursions() {
-        return excursions;
-    }
-
-    public void setExcursions(Set<Excursion> excursions) {
-        this.excursions = excursions;
-    }
+    private Set<Excursion> excursions;
 }
