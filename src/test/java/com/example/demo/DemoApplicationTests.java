@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import entities.*;
+import com.example.demo.entities.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

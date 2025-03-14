@@ -1,4 +1,4 @@
-package entities;
+package com.example.demo.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -7,7 +7,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.sql.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -22,7 +21,7 @@ public class Cart {
 
     @Column(name = "package_price")
     private BigDecimal package_price;
-    
+
     @Column(name = "party_size")
     private int party_size;
 
@@ -48,5 +47,5 @@ public class Cart {
 
     //Map to cart_items table
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<CartItem> cartItems = new HashSet<>();
+    private Set<CartItem> cartItems;
 }

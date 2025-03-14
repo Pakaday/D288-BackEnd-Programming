@@ -1,4 +1,4 @@
-package entities;
+package com.example.demo.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -6,7 +6,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -32,5 +31,5 @@ public class Country {
 
     //Map to divisions table
     @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Division> divisions = new HashSet<>();
+    private Set<Division> divisions;
 }
