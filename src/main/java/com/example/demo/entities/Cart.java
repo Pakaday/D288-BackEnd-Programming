@@ -48,4 +48,8 @@ public class Cart {
     //Map to cart_items table
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<CartItem> cartItems;
+
+    public void add(CartItem item) {
+        this.cartItems.add(item);
+    }
 }
