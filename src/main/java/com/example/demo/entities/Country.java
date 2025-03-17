@@ -12,6 +12,8 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "countries")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

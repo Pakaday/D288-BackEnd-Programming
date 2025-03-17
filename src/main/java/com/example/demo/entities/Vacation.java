@@ -13,6 +13,8 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "vacations")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Vacation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

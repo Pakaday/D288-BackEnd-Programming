@@ -12,6 +12,8 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "divisions")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Division {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

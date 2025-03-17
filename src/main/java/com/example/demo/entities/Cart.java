@@ -7,12 +7,15 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "carts")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,9 +50,12 @@ public class Cart {
 
     //Map to cart_items table
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<CartItem> cartItems;
+    private Set<CartItem> cartItems = new HashSet<>();
 
     public void add(CartItem item) {
-        this.cartItems.add(item);
+        if (item != null) {
+            cartItems.add(item);
+            item.setCart(this);
+        }
     }
 }
