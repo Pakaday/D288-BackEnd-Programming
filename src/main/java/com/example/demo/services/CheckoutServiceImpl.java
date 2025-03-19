@@ -29,28 +29,31 @@ public class CheckoutServiceImpl implements CheckoutService {
     @Transactional
     public PurchaseResponse placeOrder(Purchase purchase) {
 
+        //Retrieve cart info from purchase
         Cart cart = purchase.getCart();
-        Customer customer = purchase.getCustomer();
-        Set<CartItem> cartItems = cart.getCartItems();
+
+        //Generate tracking number
         String orderTrackingNumber = generateOrderTrackingNumber();
-
-        if (cartItems != null) {
-            cartItems.forEach(item -> {
-                item.setCart(cart);
-            });
-        }
-
         cart.setOrderTrackingNumber(orderTrackingNumber);
-        cart.setStatus(StatusType.ordered);
-        customer.add(cart);
 
+        //Populate cart with cartItems
+        Set<CartItem> cartItems = purchase.getCartItems();
+        cartItems.forEach(item -> item.setCart(cart));
+        cartItems.forEach(item -> cart.add(item));
+
+        //Set status and save to database
+        cart.setStatus(StatusType.ordered);
         cartRepository.save(cart);
-        customerRepository.save(customer);
+
+        //Populate cart with customer
+        Customer customer = purchase.getCustomer();
+        customer.add(cart);
 
         return new PurchaseResponse(orderTrackingNumber);
     }
 
     private String generateOrderTrackingNumber() {
+
         //Generate a random UUID number (UUID version-4)
         return UUID.randomUUID().toString();
     }
