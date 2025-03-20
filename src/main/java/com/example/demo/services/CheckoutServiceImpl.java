@@ -1,7 +1,7 @@
 package com.example.demo.services;
 
+import com.example.demo.dao.CartItemRepository;
 import com.example.demo.dao.CartRepository;
-import com.example.demo.dao.CustomerRepository;
 import com.example.demo.entities.Cart;
 import com.example.demo.entities.CartItem;
 import com.example.demo.entities.Customer;
@@ -16,13 +16,15 @@ import java.util.UUID;
 @Service
 public class CheckoutServiceImpl implements CheckoutService {
 
-    private CustomerRepository customerRepository;
+    @Autowired
     private CartRepository cartRepository;
 
     @Autowired
-    public CheckoutServiceImpl(CustomerRepository customerRepository, CartRepository cartRepository) {
-        this.customerRepository = customerRepository;
+    private CartItemRepository cartItemRepository;
+
+    public CheckoutServiceImpl(CartRepository cartRepository, CartItemRepository cartItemRepository) {
         this.cartRepository = cartRepository;
+        this.cartItemRepository = cartItemRepository;
     }
 
     @Override
@@ -32,12 +34,24 @@ public class CheckoutServiceImpl implements CheckoutService {
         //Retrieve cart info from purchase
         Cart cart = purchase.getCart();
 
+        //Check if cart is null
+        if (cart == null) {
+            return new PurchaseResponse("Cart cannot be empty.");
+        }
+
+        //Populate cart with cartItems
+        Set<CartItem> cartItems = purchase.getCartItems();
+
+        //Check if cartItems is null or empty
+        if (cartItems == null || cartItems.isEmpty()) {
+            return new PurchaseResponse("Cart cannot be empty.");
+        }
+
         //Generate tracking number
         String orderTrackingNumber = generateOrderTrackingNumber();
         cart.setOrderTrackingNumber(orderTrackingNumber);
 
-        //Populate cart with cartItems
-        Set<CartItem> cartItems = purchase.getCartItems();
+        //Setup cart items relationships
         cartItems.forEach(item -> item.setCart(cart));
         cartItems.forEach(item -> cart.add(item));
 
@@ -49,6 +63,7 @@ public class CheckoutServiceImpl implements CheckoutService {
         Customer customer = purchase.getCustomer();
         customer.add(cart);
 
+        //Return successful response with tracking number
         return new PurchaseResponse(orderTrackingNumber);
     }
 
