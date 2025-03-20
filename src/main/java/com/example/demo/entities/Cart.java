@@ -43,12 +43,12 @@ public class Cart {
     @UpdateTimestamp
     private Date last_udate;
 
-    //Map to customers table
+    // Map to customers table
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    //Map to cart_items table
+    // Map to cart_items table
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<CartItem> cartItems = new HashSet<>();
 

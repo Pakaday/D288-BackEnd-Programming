@@ -41,7 +41,7 @@ public class Vacation {
     @Column(name = "vacation_title")
     private String vacation_title;
 
-    //Map to excursions table
+    // Map to excursions table
     @OneToMany(mappedBy = "vacation", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Excursion> excursions;
 }

@@ -38,12 +38,12 @@ public class Excursion {
     @UpdateTimestamp
     private Date last_update;
 
-    //Map to vacations table
+    // Map to vacations table
     @ManyToOne
     @JoinColumn(name = "vacation_id")
     private Vacation vacation;
 
-    //Map to cart_items table
+    // Map to cart_items table
     @ManyToMany(mappedBy = "excursions")
     private Set<CartItem> cartitems;
 }

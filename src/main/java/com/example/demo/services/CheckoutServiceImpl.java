@@ -31,45 +31,45 @@ public class CheckoutServiceImpl implements CheckoutService {
     @Transactional
     public PurchaseResponse placeOrder(Purchase purchase) {
 
-        //Retrieve cart info from purchase
+        // Retrieve cart info from purchase
         Cart cart = purchase.getCart();
 
-        //Check if cart is null
+        // Check if cart is null
         if (cart == null) {
             return new PurchaseResponse("Cart cannot be empty.");
         }
 
-        //Populate cart with cartItems
+        // Populate cart with cartItems
         Set<CartItem> cartItems = purchase.getCartItems();
 
-        //Check if cartItems is null or empty
+        // Check if cartItems is null or empty
         if (cartItems == null || cartItems.isEmpty()) {
             return new PurchaseResponse("Cart cannot be empty.");
         }
 
-        //Generate tracking number
+        // Generate tracking number
         String orderTrackingNumber = generateOrderTrackingNumber();
         cart.setOrderTrackingNumber(orderTrackingNumber);
 
-        //Setup cart items relationships
+        // Setup cart items relationships
         cartItems.forEach(item -> item.setCart(cart));
         cartItems.forEach(item -> cart.add(item));
 
-        //Set status and save to database
+        // Set status and save to database
         cart.setStatus(StatusType.ordered);
         cartRepository.save(cart);
 
-        //Populate cart with customer
+        // Populate cart with customer
         Customer customer = purchase.getCustomer();
         customer.add(cart);
 
-        //Return successful response with tracking number
+        // Return successful response with tracking number
         return new PurchaseResponse(orderTrackingNumber);
     }
 
     private String generateOrderTrackingNumber() {
 
-        //Generate a random UUID number (UUID version-4)
+        // Generate a random UUID number (UUID version-4)
         return UUID.randomUUID().toString();
     }
 }

@@ -32,17 +32,17 @@ public class CartItem {
     @UpdateTimestamp
     private Date last_update;
 
-    //Map to carts table
+    // Map to carts table
     @ManyToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    //Map to vacation table
+    // Map to vacation table
     @ManyToOne
     @JoinColumn(name = "vacation_id")
     private Vacation vacation;
 
-    //Map to excursion_cartitem table
+    // Map to excursion_cartitem table
     @ManyToMany
     @JoinTable(name = "excursion_cartitem",
         joinColumns = @JoinColumn(name = "cart_item_id"),

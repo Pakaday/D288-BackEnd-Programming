@@ -50,12 +50,12 @@ public class Customer {
     @NotBlank(message = "Postal code is required")
     private String postal_code;
 
-    //Map to divisions table
+    // Map to divisions table
     @ManyToOne
     @JoinColumn(name = "division_id")
     private Division division;
 
-    //Map to carts table
+    // Map to carts table
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Cart> carts = new HashSet<>();
 
